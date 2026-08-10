@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Link, Navigate } from "react-router-dom";
+import BlotterPageRest from "./components/BlotterPageRest";
+import BlotterPageStream from "./components/BlotterPageStream";
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div style={{ padding: 16 }}>
+        <h2>📊 Blotter Application</h2>
+
+        {/* 🔹 Navigation Bar */}
+        <nav style={{ marginBottom: 20 }}>
+          <Link to="/blotter-rest" style={{ marginRight: 12 }}>🔁 REST Blotter</Link>
+          <Link to="/blotter-stream">⚡ Streaming Blotter</Link>
+        </nav>
+
+        <Routes>
+          <Route path="/" element={<Navigate to="/blotter-rest" />} />
+          <Route path="/blotter-rest" element={<BlotterPageRest />} />
+          <Route path="/blotter-stream" element={<BlotterPageStream />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
-
-export default App;
